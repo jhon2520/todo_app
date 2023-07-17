@@ -1,6 +1,7 @@
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:task_app/config/layout/app_layout.dart';
+import 'package:task_app/config/theme/app_colors.dart';
 
 class CustomFlagButton extends StatelessWidget {
 
@@ -15,12 +16,15 @@ class CustomFlagButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap ,
-      child: Flag.fromCode(
-        countryCode,
-        height: AppLayout.buttonFlagRadius,
-        width: AppLayout.buttonFlagRadius,
-        borderRadius: AppLayout.buttonFlagRadius,
-        flagSize: FlagSize.size_1x1,
+      child: CircleAvatar(
+        backgroundColor: AppColors.whiteColor,
+        child: Flag.fromCode(
+          countryCode,
+          height: AppLayout.buttonFlagRadius,
+          width: AppLayout.buttonFlagRadius,
+          borderRadius: AppLayout.buttonFlagRadius,
+          flagSize: FlagSize.size_1x1,
+        ),
       ),
     );
   }

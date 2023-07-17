@@ -11,6 +11,9 @@ class LanguageEn extends Languages{
 
   @override
   String get labelWelcome => "Welcome";
+  
+  @override
+  String get labelLangaugeChanged => "Language Changed";
 
 
 
