@@ -1,4 +1,4 @@
-import 'package:task_app/utils/localizations_utils/languages.dart';
+import 'package:task_app/utils/localizations/languages.dart';
 
 class LanguageEs extends Languages{
 

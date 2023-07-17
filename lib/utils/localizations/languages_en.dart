@@ -1,4 +1,4 @@
-import 'package:task_app/utils/localizations_utils/index.dart';
+import 'package:task_app/utils/localizations/index.dart';
 
 class LanguageEn extends Languages{
 

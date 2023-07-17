@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:task_app/utils/localizations_utils/app_localizations_delegate.dart';
+import 'package:task_app/utils/localizations/app_localizations_delegate.dart';
 import 'config/index.dart';
 import 'presentation/screens/index.dart';
 import 'utils/shared_preferences/shared_preferences.dart';
