@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:task_app/utils/localizations_utils/app_localizations_delegate.dart';
-import 'package:task_app/utils/localizations_utils/languages.dart';
-
+import 'config/index.dart';
+import 'presentation/screens/index.dart';
 import 'utils/shared_preferences/shared_preferences.dart';
+
 
 void main() => runApp(const MyApp());
 
@@ -45,8 +46,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.appTheme(),
       locale: _locale,
-      supportedLocales: [
+      supportedLocales: const [
         Locale("en",""),
         Locale("es",""),
       ],
@@ -68,107 +70,11 @@ class _MyAppState extends State<MyApp> {
       }
         return supportedLocales.first;
       },
-      home:Home()
+      home:const HomeScreen()
     );
   }
 }
 
 
-class Home extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => HomeState();
-}
-
-class HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) =>
-      Scaffold(
-        appBar: AppBar(
-          title: Text(Languages
-              .of(context)
-              .appName),
-        ),
-        body: Container(
-          margin: EdgeInsets.all(30),
-          child: Center(
-            child: Column(
-              children:[
-                SizedBox(
-                  height: 80,
-                ),
-                Text(
-                  Languages
-                      .of(context)
-                      .labelWelcome,
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  Languages
-                      .of(context)
-                      .labelWelcome,
-                  style: TextStyle(fontSize: 20, color: Colors.grey),
-                  textAlign: TextAlign.center,
-
-                ),
-                SizedBox(
-                  height: 70,
-                ),
-                _createLanguageDropDown()
-              ],
-            ),
-          ),
-        ),
-      );
-
-  _createLanguageDropDown() {
-    return DropdownButton<LanguageData>(
-      iconSize: 30,
-      hint: Text(Languages
-          .of(context)
-          .labelSelectLanguage),
-      onChanged: (LanguageData? language) {
-        changeLanguage(context, language!.languageCode);
-      },
-      items: LanguageData.languageList()
-          .map<DropdownMenuItem<LanguageData>>(
-            (e) =>
-            DropdownMenuItem<LanguageData>(
-              value: e,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text(
-                    e.flag,
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Text(e.name)
-                ],
-              ),
-            ),
-      )
-          .toList(),
-    );
-  }
-}
 
 
-class LanguageData {
-  final String flag;
-  final String name;
-  final String languageCode;
-
-  LanguageData(this.flag, this.name, this.languageCode);
-
-  static List<LanguageData> languageList() {
-    return <LanguageData>[
-      LanguageData("🇺🇸", "English", 'en'),
-      LanguageData("col", "Spanish", 'es'),
-    ];
-  }
-}
