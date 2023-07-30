@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task_app/presentation/screens/home_screen/widgets/index.dart';
+import 'package:task_app/config/index.dart';
 import 'package:task_app/presentation/screens/new_task_screen.dart/widgets/index.dart';
+import 'package:task_app/presentation/shared/widgets/index.dart';
+import 'package:task_app/utils/index.dart';
 
 class NewTaskScreen extends StatelessWidget {
   const NewTaskScreen({super.key});
@@ -8,42 +10,28 @@ class NewTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-      
-            FormNewTask(),
-      
-      
-      
-
-      
-      
+            
+            Text(Languages.of(context).labelCreateTask,style: AppFonts.fontStyle.copyWith(
+              fontSize: FontSizeEnum.h1.size
+            ),),
+            const FormNewTask(),
+            const CustomSpacer(spacerEnum: 	SpacerEnum.spacingX),
+            CustomPrimaryButton(
+              onPressed: () {
+                
+              },
+              label: Languages.of(context).labelSaveTask)
+  
           ],
         ),
       )
     );
   }
 }
-
-          //  Positioned(
-          //       bottom: 0,
-          //       left: 0,
-          //       child: Container(
-          //         alignment: Alignment.topCenter,
-          //         height: size.height * 0.2,
-          //         width: size.width,
-          //         // color: Colors.red,
-          //         child: CustomPaint(
-          //           painter: CustomPaintedCurve(),
-          //           child: Container(
-          //           ) ,
-          //         ),
-                  
-          //       ),
-          //     )

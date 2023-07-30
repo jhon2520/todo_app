@@ -20,4 +20,10 @@ abstract class Languages{
 
   String get labelLevel;
 
+  String get labelSaveTask;
+
+  String get labelEditTask;
+
+  String get labelCreateTask;
+
 }

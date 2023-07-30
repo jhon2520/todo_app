@@ -1,5 +1,4 @@
 
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
 import 'package:task_app/presentation/screens/index.dart';
@@ -29,7 +28,7 @@ final appRouter = GoRouter(
       path: AppRoutesStrings.newTaskScreenRoute,
       builder: (context,GoRouterState  state) {
 
-        return  NewTaskScreen();
+        return  const NewTaskScreen();
       },
       
     ),
@@ -56,6 +55,6 @@ final appRouter = GoRouter(
 
   ],
   errorBuilder: (context, state) {
-    return HomeScreen();
+    return const HomeScreen();
   },
 );

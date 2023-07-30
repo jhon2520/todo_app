@@ -23,5 +23,14 @@ class LanguageEs extends Languages{
   
   @override
   String get labelLevel => "Nivel:";
+  
+  @override
+  String get labelSaveTask => "Guardar Tarea";
+  
+  @override
+  String get labelCreateTask => "Crea Una Tarea";
+  
+  @override
+  String get labelEditTask => "Edit Task";
 
 }

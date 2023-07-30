@@ -8,6 +8,8 @@ class AppLayout{
   static const double mainBodyRaidus = 30;
   static const double heightCardsTaks = 150;
   static const double identDivider = 50;
+  static const double heightFormFields = 50;
+  static const double heightLevelSelector = 20;
   static const Duration snackBarDuration = Duration(seconds: 1);
   static const Duration animationDuration = Duration(seconds: 2);
 

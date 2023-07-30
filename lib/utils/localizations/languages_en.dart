@@ -23,6 +23,15 @@ class LanguageEn extends Languages{
   
   @override
   String get labelLevel => "level:";
+  
+  @override
+  String get labelSaveTask => "Save Task";
+  
+  @override
+  String get labelCreateTask => "Create Task";
+  
+  @override
+  String get labelEditTask => "Edit Task";
 
 
 

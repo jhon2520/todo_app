@@ -2,7 +2,7 @@
 
 class AppColors{
   static const Color mainColor = Color.fromARGB(255, 29, 66, 104);
-  static Color secondColor = Color.fromARGB(255, 38, 166, 154);
+  static Color secondColor = const Color.fromARGB(255, 38, 166, 154);
   static const Color whiteColor = Color.fromARGB(255, 255, 255, 255);
   static const Color editColor = Color(0xff59C1BD);
   static const Color errorColor = Color(0xff9C254D);
@@ -10,4 +10,7 @@ class AppColors{
   static const Color infoColor = Color(0xff256D85);
   static const Color borderCardsColors = Color.fromARGB(255, 255, 255, 255);
   static const Color cardsShade = Color.fromARGB(133, 158, 158, 158);
+  static const Color colorHighLevel = Colors.red;
+  static const Color colorMediumLevel = Colors.yellow;
+  static const Color colorLowLevel = Colors.green;
 }

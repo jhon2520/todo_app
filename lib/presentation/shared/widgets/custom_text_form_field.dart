@@ -17,14 +17,17 @@ class CustomTextFormField extends StatelessWidget {
             color: AppColors.secondColor
           )
         );
-    return TextFormField(
-      style: AppFonts.fontStyle.copyWith(color: AppColors.mainColor),
-      decoration: InputDecoration(
-        label: Text(label),
-        enabledBorder: outlineInputBorder,
-        focusedBorder: outlineInputBorder.copyWith(borderSide: BorderSide(color: AppColors.mainColor)),
-        border: outlineInputBorder,
-
+    return SizedBox(
+      height: AppLayout.heightFormFields,
+      child: TextFormField(
+        style: AppFonts.fontStyle.copyWith(color: AppColors.mainColor),
+        decoration: InputDecoration(
+          label: Text(label, style: AppFonts.fontStyle,),
+          enabledBorder: outlineInputBorder,
+          focusedBorder: outlineInputBorder.copyWith(borderSide: const BorderSide(color: AppColors.mainColor)),
+          border: outlineInputBorder,
+    
+        ),
       ),
     );
   }
