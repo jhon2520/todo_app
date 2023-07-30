@@ -10,11 +10,11 @@ class CustomListCards extends StatelessWidget {
 
     final Size size = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       height: size.height * 0.75,
       child: ShaderMask(
         shaderCallback: (Rect bounds) {
-          return LinearGradient(
+          return const LinearGradient(
             // stops: [0,0.6,0.1],
          begin: Alignment.bottomRight,
             end: Alignment.topRight,
@@ -29,10 +29,10 @@ class CustomListCards extends StatelessWidget {
         },
          blendMode: BlendMode.dstIn,
         child: ListView.separated(
-          physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM, vertical:  AppLayout.spacingS),
+          physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: AppLayout.spacingM, vertical:  AppLayout.spacingS),
             itemBuilder: (context, index) {
-              return CustomTaskCard();
+              return const CustomTaskCard();
             },
             separatorBuilder: (context, index) {
               return Divider(

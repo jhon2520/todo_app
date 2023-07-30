@@ -45,7 +45,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: appRouter,
       theme: AppTheme.appTheme(),
       locale: _locale,
       supportedLocales: const [
@@ -70,7 +71,6 @@ class _MyAppState extends State<MyApp> {
       }
         return supportedLocales.first;
       },
-      home:const HomeScreen()
     );
   }
 }

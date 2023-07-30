@@ -10,17 +10,17 @@ class CustomTaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM, vertical: AppLayout.spacingS),
+      padding: const EdgeInsets.symmetric(horizontal: AppLayout.spacingM, vertical: AppLayout.spacingS),
       width: double.infinity,
       height: AppLayout.heightCardsTaks,
-      decoration: _CardDecoration(),
-      child: _CardBodyWidget(),
+      decoration: _cardDecoration(),
+      child: const _CardBodyWidget(),
     );
   }
 
-  BoxDecoration _CardDecoration() {
+  BoxDecoration _cardDecoration() {
     return BoxDecoration(
-      boxShadow: [
+      boxShadow: const [
         BoxShadow(
           color: AppColors.cardsShade,
           spreadRadius: 1,
@@ -29,7 +29,7 @@ class CustomTaskCard extends StatelessWidget {
         ),
       ],
       color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(AppLayout.mainBodyRaidus)),
+        borderRadius: const BorderRadius.all(Radius.circular(AppLayout.mainBodyRaidus)),
         border: Border.all(
           color: AppColors.borderCardsColors
         )
@@ -38,9 +38,7 @@ class CustomTaskCard extends StatelessWidget {
 }
 
 class _CardBodyWidget extends StatelessWidget {
-  const _CardBodyWidget({
-    super.key,
-  });
+  const _CardBodyWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +48,14 @@ class _CardBodyWidget extends StatelessWidget {
         Text(  Languages.of(context).labelTask, style: AppFonts.fontStyle,),
         Text(  Languages.of(context).labelDeadline, style: AppFonts.fontStyle,),
         Text(  Languages.of(context).labelLevel, style: AppFonts.fontStyle,),
-        _CardButtonsWidget()
+        const _CardButtonsWidget()
       ],
     );
   }
 }
 
 class _CardButtonsWidget extends StatelessWidget {
-  const _CardButtonsWidget({
-    super.key,
-  });
+  const _CardButtonsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +65,13 @@ class _CardButtonsWidget extends StatelessWidget {
 
         CustomIconButton(onPressed: () {
 
-        }, icon: Icon(Icons.edit_square,color: AppColors.mainColor,)),
+        }, icon: const Icon(Icons.edit_square,color: AppColors.mainColor,)),
 
-        CustomSpacer(spacerEnum: SpacerEnum.spacingS,isHorizontal: true,),
+        const CustomSpacer(spacerEnum: SpacerEnum.spacingS,isHorizontal: true,),
 
         CustomIconButton(onPressed: () {
 
-        }, icon: Icon(Icons.delete,color: AppColors.mainColor)),
+        }, icon: const Icon(Icons.delete,color: AppColors.mainColor)),
 
 
       ],

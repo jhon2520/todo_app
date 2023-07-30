@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
-import 'package:task_app/config/theme/app_colors.dart';
 import 'package:task_app/presentation/animations/index.dart';
 import 'package:task_app/presentation/screens/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
@@ -22,13 +22,11 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.mainColor,
+        backgroundColor: AppColors.secondColor,
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppLayout.buttonFlagRadius)) ,
-        child: Icon(Icons.add,color: AppColors.whiteColor,),
-        onPressed: () {
-        
-      },),
+        child: const Icon(Icons.add,color: AppColors.whiteColor,),
+        onPressed:()=> _goToNewTaskScreen(context),),
         body: SafeArea(
           child: Container(
             height: size.height,
@@ -54,7 +52,7 @@ class HomeScreenState extends State<HomeScreen> {
                               fontSize: AppFonts.fontSizeH1),
                         ),
                       ),
-                      CustomListCards(),
+                      const CustomListCards(),
                     ],
                   ),
                 ),
@@ -63,5 +61,9 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ));
+  }
+
+  void _goToNewTaskScreen(BuildContext context){
+    context.pushNamed(AppRoutesStrings.newTaskScreenRoute);
   }
 }
