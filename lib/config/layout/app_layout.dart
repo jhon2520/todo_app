@@ -6,6 +6,7 @@ class AppLayout{
   static const double spacingX = 25;
   static const double spacingXL = 40;
   static const double mainBodyRaidus = 30;
+  static const double heightCardsTaks = 150;
   static const Duration snackBarDuration = Duration(seconds: 1);
   static const Duration animationDuration = Duration(seconds: 2);
 

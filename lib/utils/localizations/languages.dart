@@ -14,4 +14,10 @@ abstract class Languages{
 
   String get labelLangaugeChanged;
 
+  String get labelTask;
+
+  String get labelDeadline;
+
+  String get labelLevel;
+
 }

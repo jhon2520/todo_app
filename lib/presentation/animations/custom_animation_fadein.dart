@@ -23,8 +23,6 @@ class _CustomFadeInTransitionState extends State<CustomFadeInAnimation> with Sin
     _controller = AnimationController(vsync: this,duration: AppLayout.animationDuration);
     animation = Tween(begin: 0.0,end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _controller.forward();
-    print("controller: ${animation.value}");
-    print("controller: ${_controller.value}");
     
   }
 

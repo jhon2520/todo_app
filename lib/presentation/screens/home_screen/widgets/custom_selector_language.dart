@@ -1,7 +1,6 @@
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:task_app/config/index.dart';
-import 'package:task_app/config/theme/app_colors.dart';
 import 'package:task_app/presentation/animations/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
 import 'package:task_app/utils/enums/snack_bar_enum.dart';
@@ -20,8 +19,8 @@ class CustomSelectionLanguage extends StatelessWidget {
       children: [
         const CustomSpacer(spacerEnum: SpacerEnum.spacingS, isHorizontal: true,),
 
-        CustomFadeInAnimation(child: Text(Languages.of(context).appName, style: TextStyle(color: AppColors.whiteColor),)),
-        Spacer(), 
+        CustomFadeInAnimation(child: Text(Languages.of(context).appName, style: const TextStyle(color: AppColors.whiteColor),)),
+        const Spacer(), 
 
         CustomFlagButton(
           countryCode: FlagsCode.CO,

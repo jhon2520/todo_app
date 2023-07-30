@@ -7,4 +7,5 @@ class AppColors{
   static const Color errorColor = Color(0xff9C254D);
   static const Color succesColor = Color(0xff59CE8F);
   static const Color infoColor = Color(0xff256D85);
+  static const Color borderCardsColors = Color.fromARGB(255, 255, 255, 255);
 }

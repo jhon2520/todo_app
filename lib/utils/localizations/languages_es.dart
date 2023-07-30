@@ -13,6 +13,15 @@ class LanguageEs extends Languages{
   String get labelWelcome => "Bienvenido";
   
   @override
-  String get labelLangaugeChanged => "Lenguaje Cambiado";
+  String get labelLangaugeChanged => "Langauge Changed";
+  
+  @override
+  String get labelTask => "Tarea:";
+  
+  @override
+  String get labelDeadline => "Fecha Límite:";
+  
+  @override
+  String get labelLevel => "Nivel:";
 
 }

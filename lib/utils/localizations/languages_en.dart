@@ -4,7 +4,7 @@ class LanguageEn extends Languages{
 
 
   @override
-  String get appName => "Daily TODO";
+  String get appName => "Daily tasks";
 
   @override
   String get labelSelectLanguage => "Select a language";
@@ -13,7 +13,16 @@ class LanguageEn extends Languages{
   String get labelWelcome => "Welcome";
   
   @override
-  String get labelLangaugeChanged => "Language Changed";
+  String get labelLangaugeChanged => "Idioma Cambiado";
+  
+  @override
+  String get labelTask => "Task:";
+  
+  @override
+  String get labelDeadline => "Deadline:";
+  
+  @override
+  String get labelLevel => "level:";
 
 
 

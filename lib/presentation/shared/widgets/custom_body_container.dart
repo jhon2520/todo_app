@@ -16,15 +16,16 @@ class CustomBodyContainer extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM),
       height: size.height * 0.88,
       width: double.infinity,
-      child: child,
       decoration: _customDecoration(),
+      child: SingleChildScrollView(child: child),
 
     );
   }
 
-  BoxDecoration _customDecoration() => BoxDecoration(
+  BoxDecoration _customDecoration() => const BoxDecoration(
     color: AppColors.whiteColor,
     borderRadius: BorderRadius.only(
       topLeft: Radius.circular(AppLayout.mainBodyRaidus),
