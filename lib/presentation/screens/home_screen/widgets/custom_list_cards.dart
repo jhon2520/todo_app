@@ -11,19 +11,39 @@ class CustomListCards extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      height: size.height * 0.7,
-      child: ListView.separated(
-        physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM),
-          itemBuilder: (context, index) {
-            return CustomTaskCard();
-          },
-          separatorBuilder: (context, index) {
-            return Divider(
-              color: AppColors.mainColor,
-            );
-          },
-          itemCount: 8),
+      height: size.height * 0.75,
+      child: ShaderMask(
+        shaderCallback: (Rect bounds) {
+          return LinearGradient(
+            // stops: [0,0.6,0.1],
+         begin: Alignment.bottomRight,
+            end: Alignment.topRight,
+            colors: <Color>[
+              Color.fromARGB(73, 0, 0, 0),
+              Colors.white,
+              Color.fromARGB(130, 158, 158, 158)
+            ],
+          
+          
+          ).createShader(bounds);
+        },
+         blendMode: BlendMode.dstIn,
+        child: ListView.separated(
+          physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM, vertical:  AppLayout.spacingS),
+            itemBuilder: (context, index) {
+              return CustomTaskCard();
+            },
+            separatorBuilder: (context, index) {
+              return Divider(
+            
+                indent: AppLayout.identDivider,
+                endIndent: AppLayout.identDivider,
+                color: AppColors.mainColor.withOpacity(0.1),
+              );
+            },
+            itemCount: 8),
+      ),
     );
   }
 }

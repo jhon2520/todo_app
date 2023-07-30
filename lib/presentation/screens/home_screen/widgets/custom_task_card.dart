@@ -22,10 +22,10 @@ class CustomTaskCard extends StatelessWidget {
     return BoxDecoration(
       boxShadow: [
         BoxShadow(
-          color: Colors.grey,
+          color: AppColors.cardsShade,
           spreadRadius: 1,
-          blurRadius: 9,
-          offset: Offset(2,3)
+          blurRadius: 5,
+          offset: Offset(1,2)
         ),
       ],
       color: Colors.white,

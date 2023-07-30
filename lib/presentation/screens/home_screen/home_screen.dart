@@ -16,36 +16,52 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-          body: SafeArea(
-        child: Container(
-          color: AppColors.mainColor,
-          child: Column(
-            children: [
-              const CustomSpacer(
-                spacerEnum: SpacerEnum.spacingM,
-              ),
-              const CustomSelectionLanguage(),
-              const Spacer(),
-              CustomBodyContainer(
-                child: Column(
-                  children: [
-                    const CustomSpacer(
-                      spacerEnum: SpacerEnum.spacingS,
-                    ),
-                    CustomFadeInAnimation(
-                      child: Text(
-                        Languages.of(context).labelWelcome,
-                        style:AppFonts.fontStyle.copyWith(color: AppColors.mainColor,fontSize: AppFonts.fontSizeH1),
-                      ),
-                    ),
-                    CustomListCards()
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
 
-                  ],
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.mainColor,
+        elevation: 5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppLayout.buttonFlagRadius)) ,
+        child: Icon(Icons.add,color: AppColors.whiteColor,),
+        onPressed: () {
+        
+      },),
+        body: SafeArea(
+          child: Container(
+            height: size.height,
+            color: AppColors.mainColor,
+            child: Column(
+              children: [
+                const CustomSpacer(
+                  spacerEnum: SpacerEnum.spacingM,
                 ),
-              ),
-            ],
+                const CustomSelectionLanguage(),
+                const Spacer(),
+                CustomBodyContainer(
+                  child: Column(
+                    children: [
+                      const CustomSpacer(
+                        spacerEnum: SpacerEnum.spacingS,
+                      ),
+                      CustomFadeInAnimation(
+                        child: Text(
+                          Languages.of(context).labelWelcome,
+                          style: AppFonts.fontStyle.copyWith(
+                              color: AppColors.mainColor,
+                              fontSize: AppFonts.fontSizeH1),
+                        ),
+                      ),
+                      CustomListCards(),
+                    ],
+                  ),
+                ),
+                
+              ],
+            ),
           ),
-        ),
-      ));
+        ));
+  }
 }

@@ -19,7 +19,7 @@ class CustomSelectionLanguage extends StatelessWidget {
       children: [
         const CustomSpacer(spacerEnum: SpacerEnum.spacingS, isHorizontal: true,),
 
-        CustomFadeInAnimation(child: Text(Languages.of(context).appName, style: const TextStyle(color: AppColors.whiteColor),)),
+        CustomFadeInAnimation(child: Text(Languages.of(context).appName, style: AppFonts.fontStyle.copyWith(color: AppColors.whiteColor),)),
         const Spacer(), 
 
         CustomFlagButton(

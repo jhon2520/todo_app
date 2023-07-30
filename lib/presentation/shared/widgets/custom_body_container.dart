@@ -16,7 +16,7 @@ class CustomBodyContainer extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM),
+      // padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM),
       height: size.height * 0.88,
       width: double.infinity,
       decoration: _customDecoration(),
