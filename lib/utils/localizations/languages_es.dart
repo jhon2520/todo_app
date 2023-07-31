@@ -48,5 +48,8 @@ class LanguageEs extends Languages{
   
   @override
   String get labelLevelMedium => "Medio";
+  
+  @override
+  String get labelTaskSaved => "Tarea Guardad";
 
 }

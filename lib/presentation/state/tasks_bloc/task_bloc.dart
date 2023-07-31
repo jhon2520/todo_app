@@ -26,5 +26,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       log("se eliminó la tarea activa");
       emit(TasksSetSate(currentTask: null,newTasks: state.tasks));
     });
+
+    on<DeletedTaskEvent>((event, emit) {
+      log("se eliminó una tarea");
+      List<TaskModel>? newTasks = state.tasks?.where((element) => element.id != event.idToDelete).toList();
+      emit(TasksSetSate(currentTask: null,newTasks: newTasks));
+
+    });
   }
 }

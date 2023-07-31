@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_app/config/index.dart';
 import 'package:task_app/data/models/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
+import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/enums/index.dart';
 import 'package:task_app/utils/formats/formats_utils.dart';
 import 'package:task_app/utils/localizations/index.dart';
@@ -54,8 +56,8 @@ class _CardBodyWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(  "${Languages.of(context).labelTask} ${task?.taksName ?? ""}", style: AppFonts.fontStyle,maxLines: 1,overflow: TextOverflow.clip,),
-        Text(  "${Languages.of(context).labelDeadline} ${FormatsUtils.formatDates(task?.deadLine) }", style: AppFonts.fontStyle,),
+        Text("${Languages.of(context).labelTask} ${task?.taksName ?? ""}", style: AppFonts.fontStyle,maxLines: 1,overflow: TextOverflow.clip,),
+        Text("${Languages.of(context).labelDeadline} ${FormatsUtils.formatDates(task?.deadLine) }", style: AppFonts.fontStyle,),
         Row(
           children: [
             Text(  "${Languages.of(context).labelLevel} ${_validateLevel(context,task!)}", style: AppFonts.fontStyle,),
@@ -63,7 +65,7 @@ class _CardBodyWidget extends StatelessWidget {
             _CustomLevelBoxIndicator(color: task?.levelColor),
           ],
         ),
-        const _CardButtonsWidget()
+        _CardButtonsWidget(idTask: task?.id,)
       ],
     );
   }
@@ -103,10 +105,16 @@ class _CustomLevelBoxIndicator extends StatelessWidget {
 }
 
 class _CardButtonsWidget extends StatelessWidget {
-  const _CardButtonsWidget();
+
+  final idTask;
+
+  const _CardButtonsWidget({required this.idTask});
 
   @override
   Widget build(BuildContext context) {
+
+    final state = context.watch<TaskBloc>().state;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -117,12 +125,18 @@ class _CardButtonsWidget extends StatelessWidget {
 
         const CustomSpacer(spacerEnum: SpacerEnum.spacingS,isHorizontal: true,),
 
-        CustomIconButton(onPressed: () {
-
-        }, icon: const Icon(Icons.delete,color: AppColors.mainColor)),
+        CustomIconButton(
+          onPressed: () => _deleteTask(context,state),
+          icon: const Icon(Icons.delete,color: AppColors.mainColor)),
 
 
       ],
     );
+  }
+
+  void _deleteTask(BuildContext context, TaskState state){
+    context.read<TaskBloc>().add(DeletedTaskEvent(
+      idToDelete: idTask
+    ));
   }
 }

@@ -6,13 +6,31 @@ import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/index.dart';
 
 
-class CustomDatePickerField extends StatelessWidget {
+class CustomDatePickerField extends StatefulWidget {
 
   final TextEditingController controller;
   final String label;
 
 
   const CustomDatePickerField({super.key, required this.controller, required this.label});
+
+  @override
+  State<CustomDatePickerField> createState() => _CustomDatePickerFieldState();
+}
+
+class _CustomDatePickerFieldState extends State<CustomDatePickerField> {
+
+
+  Locale? _locale;
+
+  @override
+  void didChangeDependencies() {
+    getLocale().then((locale) {
+      _locale = locale;
+    });
+    super.didChangeDependencies();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +64,7 @@ class CustomDatePickerField extends StatelessWidget {
           height: AppLayout.heightFormFields,
           child: TextFormField(
             
-            controller: controller,
+            controller: widget.controller,
             enableInteractiveSelection: false,
             onChanged: (value) {},
             onTap: () async{
@@ -60,7 +78,7 @@ class CustomDatePickerField extends StatelessWidget {
               suffixIcon: const Icon(Icons.calendar_month,
                   color: AppColors.infoColor, size: AppLayout.iconFormfieldSize),
               suffixIconColor: AppColors.secondColor,
-              label: Text(label,
+              label: Text(widget.label,
                   style: AppFonts.fontStyle),
               focusedBorder: outlineInputBorder,
               enabledBorder:outlineInputBorder
@@ -69,10 +87,29 @@ class CustomDatePickerField extends StatelessWidget {
         );
   }
 
-    Future<DateTime?> _onTap(BuildContext context) async {
+  Future<DateTime?> _onTap(BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());
 
     DateTime? newDate = await showDatePicker(
+      locale: _locale,
+        builder: (context, child) {
+          return Theme(data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.secondColor,
+              onSurface: AppColors.mainColor
+              
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                backgroundColor: AppColors.secondColor,
+                foregroundColor: AppColors.whiteColor
+              )
+            )
+          ),
+          
+          
+          child: child!);
+        },
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
@@ -80,7 +117,7 @@ class CustomDatePickerField extends StatelessWidget {
     if (newDate == null) {
       return null;
     }
-    controller.text =  FormatsUtils.formatDates(newDate);
+    widget.controller.text =  FormatsUtils.formatDates(newDate);
 
     return newDate;
     

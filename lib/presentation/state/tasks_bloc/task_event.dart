@@ -15,3 +15,11 @@ class ActivadedCurrentTaks extends TaskEvent{
 }
 
 class DeactivatedCurrrentTask extends TaskEvent{}
+
+class DeletedTaskEvent extends TaskEvent{
+
+  final String? idToDelete;
+
+  DeletedTaskEvent({this.idToDelete});
+
+}

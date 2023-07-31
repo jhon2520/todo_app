@@ -36,4 +36,6 @@ abstract class Languages{
 
   String get labelLevelLow;
 
+  String get labelTaskSaved;
+
 }

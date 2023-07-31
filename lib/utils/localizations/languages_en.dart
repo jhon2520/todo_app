@@ -48,6 +48,9 @@ class LanguageEn extends Languages{
   
   @override
   String get labelLevelMedium => "Medium";
+  
+  @override
+  String get labelTaskSaved => "Task Saved";
 
 
 

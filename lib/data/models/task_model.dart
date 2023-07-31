@@ -14,7 +14,9 @@ class TaskModel{
     this.deadLine,
     this.level,
     this.levelColor
-  });
+  }){
+    id = DateTime.now().microsecondsSinceEpoch.toString();
+  }
 
 
   TaskModel copyWith({

@@ -48,6 +48,9 @@ class NewTaskScreen extends StatelessWidget {
                     _saveTaks(context,state);
                     _deactivateCurrtenTask(context,state);
                     _closeScreen(context);
+                    ShowSnackBar.showSnackBar(context, SnackBarEnum.success, Languages.of(context).labelTaskSaved);
+
+
                   } : null,
                   label: Languages.of(context).labelSaveTask)
   
