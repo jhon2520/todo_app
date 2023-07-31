@@ -32,5 +32,21 @@ class LanguageEs extends Languages{
   
   @override
   String get labelEditTask => "Edit Task";
+  
+  @override
+  String get labelNoTask => """ No Hay Tareas.
+  Crea una""";
+  
+  @override
+  String get labelSelectOne => "Selecciona";
+  
+  @override
+  String get labelLevelHigh => "Alto";
+  
+  @override
+  String get labelLevelLow => "Bajo";
+  
+  @override
+  String get labelLevelMedium => "Medio";
 
 }

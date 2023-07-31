@@ -7,9 +7,7 @@ import 'package:task_app/presentation/screens/new_task_screen.dart/new_task_scre
 
 final appRouter = GoRouter(
   redirectLimit: 3,
-  redirect: (context, state) {
-    
-  },
+ 
   debugLogDiagnostics: true,
   initialLocation: AppRoutesStrings.initialRoute,
   routes: [

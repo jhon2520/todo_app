@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:task_app/config/index.dart';
+import 'package:task_app/data/models/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
 import 'package:task_app/utils/enums/index.dart';
+import 'package:task_app/utils/formats/formats_utils.dart';
 import 'package:task_app/utils/localizations/index.dart';
+import 'dart:math' as math;
 
 class CustomTaskCard extends StatelessWidget {
-  const CustomTaskCard({super.key});
+
+  final TaskModel? task;
+
+  const CustomTaskCard({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +20,7 @@ class CustomTaskCard extends StatelessWidget {
       width: double.infinity,
       height: AppLayout.heightCardsTaks,
       decoration: _cardDecoration(),
-      child: const _CardBodyWidget(),
+      child: _CardBodyWidget(task: task),
     );
   }
 
@@ -38,18 +44,60 @@ class CustomTaskCard extends StatelessWidget {
 }
 
 class _CardBodyWidget extends StatelessWidget {
-  const _CardBodyWidget();
+
+  final TaskModel? task;
+
+  const _CardBodyWidget({required this.task});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(  Languages.of(context).labelTask, style: AppFonts.fontStyle,),
-        Text(  Languages.of(context).labelDeadline, style: AppFonts.fontStyle,),
-        Text(  Languages.of(context).labelLevel, style: AppFonts.fontStyle,),
+        Text(  "${Languages.of(context).labelTask} ${task?.taksName ?? ""}", style: AppFonts.fontStyle,maxLines: 1,overflow: TextOverflow.clip,),
+        Text(  "${Languages.of(context).labelDeadline} ${FormatsUtils.formatDates(task?.deadLine) }", style: AppFonts.fontStyle,),
+        Row(
+          children: [
+            Text(  "${Languages.of(context).labelLevel} ${_validateLevel(context,task!)}", style: AppFonts.fontStyle,),
+            const CustomSpacer(spacerEnum: SpacerEnum.spacingS,isHorizontal: true,),
+            _CustomLevelBoxIndicator(color: task?.levelColor),
+          ],
+        ),
         const _CardButtonsWidget()
       ],
+    );
+  }
+
+    String _validateLevel(BuildContext context, TaskModel task){
+ 
+    switch (task.level) {
+      case LevelTaskEnum.high:
+        return Languages.of(context).labelLevelHigh;        
+      case LevelTaskEnum.medium:
+        return Languages.of(context).labelLevelMedium;        
+      case LevelTaskEnum.low:
+        return Languages.of(context).labelLevelLow;        
+      default:
+      return "";
+    }
+  }
+}
+
+class _CustomLevelBoxIndicator extends StatelessWidget {
+
+  final Color? color;
+
+  const _CustomLevelBoxIndicator({required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: math.pi /4,
+      child: Container(
+        height: AppLayout.boxLevelIndicatorHeightWitdth,
+        width: AppLayout.boxLevelIndicatorHeightWitdth,
+        color:color
+      ),
     );
   }
 }

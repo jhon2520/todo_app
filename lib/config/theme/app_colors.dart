@@ -13,4 +13,6 @@ class AppColors{
   static const Color colorHighLevel = Colors.red;
   static const Color colorMediumLevel = Colors.yellow;
   static const Color colorLowLevel = Colors.green;
+  static const Color borderFieldsColor = Color.fromARGB(94, 170, 172, 170);
+  static const Color disableButton = Color.fromARGB(169, 170, 172, 170);
 }

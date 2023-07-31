@@ -5,26 +5,44 @@ import 'package:task_app/config/index.dart';
 class CustomTextFormField extends StatelessWidget {
 
   final String label;
+  final Function(String)? onChanged;
 
-  const CustomTextFormField({super.key, required this.label});
+  const CustomTextFormField({super.key, required this.label,required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
 
     final outlineInputBorder = OutlineInputBorder(
+
           borderRadius: BorderRadius.circular(AppLayout.mainBodyRaidus),
-          borderSide: BorderSide(
-            color: AppColors.secondColor
+          borderSide: const BorderSide(
+            color: AppColors.borderFieldsColor,
           )
         );
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(AppLayout.mainBodyRaidus),
+
+        color: AppColors.whiteColor,
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.cardsShade,
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(1,2)
+
+          )
+        ]
+      ),
       height: AppLayout.heightFormFields,
       child: TextFormField(
+        onChanged: onChanged,
         style: AppFonts.fontStyle.copyWith(color: AppColors.mainColor),
         decoration: InputDecoration(
+          suffixIcon: const Icon(Icons.task, color: AppColors.infoColor, size: AppLayout.iconFormfieldSize),
           label: Text(label, style: AppFonts.fontStyle,),
           enabledBorder: outlineInputBorder,
-          focusedBorder: outlineInputBorder.copyWith(borderSide: const BorderSide(color: AppColors.mainColor)),
+          focusedBorder: outlineInputBorder.copyWith(borderSide:  BorderSide(color: AppColors.mainColor.withOpacity(0.4))),
           border: outlineInputBorder,
     
         ),

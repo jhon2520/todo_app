@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
 import 'package:task_app/presentation/animations/index.dart';
 import 'package:task_app/presentation/screens/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
+import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/enums/index.dart';
 import 'package:task_app/utils/localizations/index.dart';
 
@@ -17,7 +19,9 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+
     final Size size = MediaQuery.of(context).size;
+    final state = context.watch<TaskBloc>().state;
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -52,6 +56,11 @@ class HomeScreenState extends State<HomeScreen> {
                               fontSize: AppFonts.fontSizeH1),
                         ),
                       ),
+                      (state.existTasks == false ||
+                        state.tasks == null ||
+                       state.tasks!.isEmpty) ?
+                        const CustomNoTaskWidget():
+                      
                       const CustomListCards(),
                     ],
                   ),

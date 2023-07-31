@@ -26,4 +26,14 @@ abstract class Languages{
 
   String get labelCreateTask;
 
+  String get labelNoTask;
+
+  String get labelSelectOne;
+
+  String get labelLevelHigh;
+
+  String get labelLevelMedium;
+
+  String get labelLevelLow;
+
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_app/config/index.dart';
+import 'package:task_app/data/models/index.dart';
+import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/index.dart';
 
 
@@ -14,25 +17,48 @@ class CustomDatePickerField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final state = context.watch<TaskBloc>().state;
+
       final outlineInputBorder = OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppLayout.mainBodyRaidus),
-          borderSide: BorderSide(
-            color: AppColors.secondColor
+          borderSide: const BorderSide(
+            color: AppColors.borderFieldsColor
           )
         );
 
 
-      return SizedBox(
+      return Container(
+          decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(AppLayout.mainBodyRaidus),
+
+        color: AppColors.whiteColor,
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.cardsShade,
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(1,2)
+
+          )
+        ]
+      ),
+
           height: AppLayout.heightFormFields,
           child: TextFormField(
+            
             controller: controller,
             enableInteractiveSelection: false,
             onChanged: (value) {},
-            onTap: () => _onTap(context),
+            onTap: () async{
+              final DateTime? deadline = await _onTap(context);
+              _setDeadlineCurrentTaks(context,state,deadline);
+
+
+            },
             style: AppFonts.fontStyle,
             decoration: InputDecoration(
               suffixIcon: const Icon(Icons.calendar_month,
-                  color: AppColors.mainColor, size: 14),
+                  color: AppColors.infoColor, size: AppLayout.iconFormfieldSize),
               suffixIconColor: AppColors.secondColor,
               label: Text(label,
                   style: AppFonts.fontStyle),
@@ -43,7 +69,7 @@ class CustomDatePickerField extends StatelessWidget {
         );
   }
 
-    Future<void> _onTap(BuildContext context) async {
+    Future<DateTime?> _onTap(BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());
 
     DateTime? newDate = await showDatePicker(
@@ -52,10 +78,25 @@ class CustomDatePickerField extends StatelessWidget {
         firstDate: DateTime(1900),
         lastDate: DateTime(2100));
     if (newDate == null) {
+      return null;
+    }
+    controller.text =  FormatsUtils.formatDates(newDate);
+
+    return newDate;
+    
+  }
+
+  void _setDeadlineCurrentTaks(
+      BuildContext context, TaskState state, DateTime? dateTime) {
+    if (dateTime == null) {
       return;
     }
 
+    final TaskModel activeTask = TaskModel();
 
-    controller.text =  FormatsUtils.formatDates(newDate);
+    context.read<TaskBloc>().add(ActivadedCurrentTaks(
+        newActiveTask: state.activeTask == null
+            ? activeTask.copyWith(deadLine: dateTime)
+            : state.activeTask?.copyWith(deadLine: dateTime)));
   }
 }

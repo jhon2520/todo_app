@@ -13,8 +13,9 @@ class CustomPrimaryButton extends StatelessWidget {
     return FilledButton.tonal(
       style: TextButton.styleFrom(
         backgroundColor: AppColors.mainColor,
+        disabledBackgroundColor: AppColors.disableButton
       ),
-      onPressed: onPressed, 
+      onPressed: onPressed , 
       child: Text(label, style: AppFonts.fontStyle.copyWith(color: AppColors.whiteColor),)
     );
   }
