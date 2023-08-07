@@ -73,6 +73,6 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   void _goToNewTaskScreen(BuildContext context){
-    context.pushNamed(AppRoutesStrings.newTaskScreenRoute);
+    context.pushNamed(AppRoutesStrings.newTaskScreenRoute,extra: null);
   }
 }

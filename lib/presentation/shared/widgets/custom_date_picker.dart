@@ -10,9 +10,11 @@ class CustomDatePickerField extends StatefulWidget {
 
   final TextEditingController controller;
   final String label;
+  final Function(String)? onChanged;
+  final TaskModel? taskToEdit;
 
 
-  const CustomDatePickerField({super.key, required this.controller, required this.label});
+  const CustomDatePickerField({super.key, required this.controller, required this.label, this.onChanged, this.taskToEdit});
 
   @override
   State<CustomDatePickerField> createState() => _CustomDatePickerFieldState();
@@ -128,6 +130,14 @@ class _CustomDatePickerFieldState extends State<CustomDatePickerField> {
     if (dateTime == null) {
       return;
     }
+
+        
+    if (widget.taskToEdit != null) {
+      context.read<TaskBloc>().add(EditedTaskEvent(
+          taskToEditId: state.taskToEdit?.copyWith(deadLine: dateTime)));
+      return;
+    }
+
 
     final TaskModel activeTask = TaskModel();
 

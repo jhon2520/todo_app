@@ -1,6 +1,7 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
+import 'package:task_app/data/models/index.dart';
 import 'package:task_app/presentation/screens/index.dart';
 import 'package:task_app/presentation/screens/new_task_screen.dart/new_task_screen.dart';
 
@@ -25,8 +26,8 @@ final appRouter = GoRouter(
       name: AppRoutesStrings.newTaskScreenRoute,
       path: AppRoutesStrings.newTaskScreenRoute,
       builder: (context,GoRouterState  state) {
-
-        return  const NewTaskScreen();
+        final TaskModel taskToEdit = state.extra as TaskModel;
+        return  NewTaskScreen(taskToEdit: taskToEdit);
       },
       
     ),

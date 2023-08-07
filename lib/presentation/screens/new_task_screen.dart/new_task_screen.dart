@@ -2,18 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
+import 'package:task_app/data/models/index.dart';
 import 'package:task_app/presentation/screens/new_task_screen.dart/widgets/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
 import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/index.dart';
 
 class NewTaskScreen extends StatelessWidget {
-  const NewTaskScreen({super.key});
+
+  final TaskModel? taskToEdit;
+
+  const NewTaskScreen({super.key, this.taskToEdit});
 
   @override
   Widget build(BuildContext context) {
 
+
+
     final TaskState  state  = context.watch<TaskBloc>().state;
+
+
 
 
     return Scaffold(
@@ -40,19 +48,17 @@ class NewTaskScreen extends StatelessWidget {
                 Text(Languages.of(context).labelCreateTask,style: AppFonts.fontStyle.copyWith(
                   fontSize: FontSizeEnum.h1.size
                 ),),
-                const FormNewTask(),
+                FormNewTask(taskToEdit:taskToEdit),
                 const CustomSpacer(spacerEnum: 	SpacerEnum.spacingX),
                 CustomPrimaryButton(
-                  onPressed:_existTask(state) ? () {
-
-                    _saveTaks(context,state);
-                    _deactivateCurrtenTask(context,state);
-                    _closeScreen(context);
-                    ShowSnackBar.showSnackBar(context, SnackBarEnum.success, Languages.of(context).labelTaskSaved);
-
-
-                  } : null,
-                  label: Languages.of(context).labelSaveTask)
+                  onPressed: taskToEdit != null
+                      ? ()=>_editAndClose(context, state)
+                      : _existTask(state)
+                          ? () => _saveAndClose(context, state)
+                          : null,
+                  label: taskToEdit == null 
+                  ? Languages.of(context).labelSaveTask
+                  : Languages.of(context).labelEditTask)
   
               ],
             ),
@@ -69,8 +75,27 @@ class NewTaskScreen extends StatelessWidget {
     return true;
   }
 
+   _saveAndClose(BuildContext context, TaskState state){
+    _saveTaks(context,state);
+    _deactivateCurrtenTask(context,state);
+    _closeScreen(context);
+    ShowSnackBar.showSnackBar(context, SnackBarEnum.success, Languages.of(context).labelTaskSaved);
+  }
+
+   _editAndClose(BuildContext context, TaskState state){
+    // _editTask(context,state);
+    _deactivateCurrtenTask(context,state);
+    _closeScreen(context);
+    ShowSnackBar.showSnackBar(context, SnackBarEnum.success, Languages.of(context).labelTaskSaved);
+  }
+
   void _saveTaks(BuildContext context, TaskState state) {
-    context.read<TaskBloc>().add(ActivatedTaksEvent(task: state.activeTask));
+    context.read<TaskBloc>().add(ActivatedTaksEvent(
+      task: state.activeTask?.copyWith(id:DateTime.now().microsecondsSinceEpoch.toString())));
+  }
+
+  void _editTask(BuildContext context, TaskState state){
+    context.read<TaskBloc>().add(EditedTaskEvent(taskToEditId: state.taskToEdit));
   }
 
   void _deactivateCurrtenTask(BuildContext context, TaskState state) {

@@ -23,3 +23,18 @@ class DeletedTaskEvent extends TaskEvent{
   DeletedTaskEvent({this.idToDelete});
 
 }
+
+class ActivatedTaskToEdit extends TaskEvent{
+  final TaskModel? taskToEdit;
+
+  ActivatedTaskToEdit({this.taskToEdit});
+
+}
+
+class EditedTaskEvent extends TaskEvent{
+
+  final TaskModel? taskToEditId;
+
+  EditedTaskEvent({this.taskToEditId});
+
+}

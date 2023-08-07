@@ -5,9 +5,10 @@ import 'package:task_app/config/index.dart';
 class CustomTextFormField extends StatelessWidget {
 
   final String label;
+  final TextEditingController? controller;
   final Function(String)? onChanged;
 
-  const CustomTextFormField({super.key, required this.label,required this.onChanged});
+  const CustomTextFormField({super.key, required this.label,required this.onChanged, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       height: AppLayout.heightFormFields,
       child: TextFormField(
+        controller: controller ,
         onChanged: onChanged,
         style: AppFonts.fontStyle.copyWith(color: AppColors.mainColor),
         decoration: InputDecoration(

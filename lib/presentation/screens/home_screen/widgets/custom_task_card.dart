@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
 import 'package:task_app/data/models/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
@@ -65,7 +66,7 @@ class _CardBodyWidget extends StatelessWidget {
             _CustomLevelBoxIndicator(color: task?.levelColor),
           ],
         ),
-        _CardButtonsWidget(idTask: task?.id,)
+        _CardButtonsWidget(task: task)
       ],
     );
   }
@@ -106,9 +107,9 @@ class _CustomLevelBoxIndicator extends StatelessWidget {
 
 class _CardButtonsWidget extends StatelessWidget {
 
-  final idTask;
+  final TaskModel? task;
 
-  const _CardButtonsWidget({required this.idTask});
+  const _CardButtonsWidget({required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -119,9 +120,8 @@ class _CardButtonsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
 
-        CustomIconButton(onPressed: () {
-
-        }, icon: const Icon(Icons.edit_square,color: AppColors.mainColor,)),
+        CustomIconButton(onPressed: ()=>_editTaks(context,state)
+        , icon: const Icon(Icons.edit_square,color: AppColors.mainColor,)),
 
         const CustomSpacer(spacerEnum: SpacerEnum.spacingS,isHorizontal: true,),
 
@@ -136,7 +136,16 @@ class _CardButtonsWidget extends StatelessWidget {
 
   void _deleteTask(BuildContext context, TaskState state){
     context.read<TaskBloc>().add(DeletedTaskEvent(
-      idToDelete: idTask
+      idToDelete: task?.id
     ));
+  }
+
+  void _editTaks(BuildContext context,TaskState state){
+    print("al darle click al boton editar ________${task?.id}");
+
+    context.read<TaskBloc>().add(ActivatedTaskToEdit(
+      taskToEdit: task
+    ));
+    context.pushNamed(AppRoutesStrings.newTaskScreenRoute,extra: task);
   }
 }

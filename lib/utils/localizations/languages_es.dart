@@ -31,7 +31,7 @@ class LanguageEs extends Languages{
   String get labelCreateTask => "Crea Una Tarea";
   
   @override
-  String get labelEditTask => "Edit Task";
+  String get labelEditTask => "Editar Tarea";
   
   @override
   String get labelNoTask => """ No Hay Tareas.

@@ -7,7 +7,10 @@ import 'package:task_app/utils/index.dart';
 import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 
 class CustomLevelSelector extends StatelessWidget {
-  const CustomLevelSelector({super.key});
+
+  final TaskModel? taskToEdit;
+
+  const CustomLevelSelector({super.key, this.taskToEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class CustomLevelSelector extends StatelessWidget {
       height: AppLayout.heightFormFields,
       padding: const EdgeInsets.symmetric(horizontal: AppLayout.spacingM),
       decoration: _customDecoration(),
-      child: const _BodyCustomLevelSelector(),
+      child:  _BodyCustomLevelSelector(taskToEdit: taskToEdit),
     );
   }
 
@@ -43,7 +46,9 @@ class CustomLevelSelector extends StatelessWidget {
 }
 
 class _BodyCustomLevelSelector extends StatelessWidget {
-  const _BodyCustomLevelSelector();
+    final TaskModel? taskToEdit;
+
+  const _BodyCustomLevelSelector({this.taskToEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -52,22 +57,22 @@ class _BodyCustomLevelSelector extends StatelessWidget {
     return Row(
       children: [
 
-        Text("${Languages.of(context).labelLevel} ${_validateLevel(context, state)}", style: AppFonts.fontStyle,),
+        Text("${Languages.of(context).labelLevel} ${ taskToEdit != null ? _validateLevel(context, state.taskToEdit) : _validateLevel(context, state.activeTask)}", style: AppFonts.fontStyle,),
         const Spacer(),
 
-        const _LevelSelector()
+        _LevelSelector(taskToEdit: taskToEdit,)
 
       ]
     );
   }
 
-  String _validateLevel(BuildContext context, TaskState state){
+  String _validateLevel(BuildContext context, TaskModel? task){
 
-    if(state.activeTask == null){
+    if(task == null){
       return Languages.of(context).labelSelectOne;
     }
  
-    switch (state.activeTask!.level) {
+    switch (task.level) {
       case LevelTaskEnum.high:
         return Languages.of(context).labelLevelHigh;        
       case LevelTaskEnum.medium:
@@ -81,23 +86,29 @@ class _BodyCustomLevelSelector extends StatelessWidget {
 }
 
 class _LevelSelector extends StatelessWidget {
-  const _LevelSelector();
+
+  final TaskModel? taskToEdit;
+
+  const _LevelSelector({this.taskToEdit});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
+      children:  [
         _ItemSelector(
+          taskToEdit: taskToEdit,
           levelTaskEnum: LevelTaskEnum.low,
           color: AppColors.colorLowLevel,
         ),
         CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
         _ItemSelector(
+          taskToEdit: taskToEdit,
           levelTaskEnum: LevelTaskEnum.medium,
           color: AppColors.colorMediumLevel,
         ),
         CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
         _ItemSelector(
+          taskToEdit: taskToEdit,
           levelTaskEnum: LevelTaskEnum.high,
           color: AppColors.colorHighLevel,
         ),
@@ -112,21 +123,33 @@ class _ItemSelector extends StatelessWidget {
 
   final Color color;
   final LevelTaskEnum levelTaskEnum;
+  final TaskModel? taskToEdit;
 
-  const _ItemSelector({required this.color, required this.levelTaskEnum});
+  const _ItemSelector({required this.color, required this.levelTaskEnum,this.taskToEdit});
 
   @override
   Widget build(BuildContext context) {
 
     final state = context.watch<TaskBloc>().state;
+    print("state task to edit ${state.taskToEdit?.level}");
 
     return GestureDetector(
-      onTap: () =>_activateColorCurrentTask(context,state, color),
+      onTap: () =>_activateColorCurrentTask(context,state, color,levelTaskEnum),
       child: Container(
         height: AppLayout.heightLevelSelector ,
         width: AppLayout.heightLevelSelector ,
         decoration: BoxDecoration(
           boxShadow: [
+
+            state.taskToEdit != null ?
+
+              BoxShadow(
+              color: state.taskToEdit?.level == levelTaskEnum ? color : AppColors.whiteColor,
+              spreadRadius: 3,
+              blurRadius: 3,
+              offset: const Offset(1,1)
+            ):
+
             BoxShadow(
               color: state.activeTask?.level == levelTaskEnum ? color : AppColors.whiteColor,
               spreadRadius: 3,
@@ -141,7 +164,17 @@ class _ItemSelector extends StatelessWidget {
     );
   }
 
-  void _activateColorCurrentTask(BuildContext context, TaskState state,Color color) {
+  void _activateColorCurrentTask(BuildContext context, TaskState state,Color color, LevelTaskEnum levelTaskEnum) {
+
+        
+    if (taskToEdit != null) {
+      context.read<TaskBloc>().add(EditedTaskEvent(
+          taskToEditId: state.taskToEdit?.copyWith(levelColor: color,level: levelTaskEnum)));
+          
+      return;
+    }
+
+
     final TaskModel activeTask = TaskModel();
 
     context.read<TaskBloc>().add(ActivadedCurrentTaks(
