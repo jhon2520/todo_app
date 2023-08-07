@@ -1,7 +1,7 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
-import 'package:task_app/data/models/index.dart';
+import 'package:task_app/domain/models/index.dart';
 import 'package:task_app/presentation/screens/index.dart';
 import 'package:task_app/presentation/screens/new_task_screen.dart/new_task_screen.dart';
 

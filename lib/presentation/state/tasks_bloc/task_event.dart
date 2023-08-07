@@ -9,6 +9,10 @@ class ActivatedTaksEvent extends TaskEvent{
   ActivatedTaksEvent({this.task});
 }
 
+class GetPreviousSavedTask extends TaskEvent{}
+
+class DeleteAllTasks extends TaskEvent{}
+
 class ActivadedCurrentTaks extends TaskEvent{
   final TaskModel? newActiveTask;
   ActivadedCurrentTaks({this.newActiveTask});

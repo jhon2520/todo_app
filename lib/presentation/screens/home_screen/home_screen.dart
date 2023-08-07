@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quick_actions/quick_actions.dart';
 import 'package:task_app/config/index.dart';
 import 'package:task_app/presentation/animations/index.dart';
 import 'package:task_app/presentation/screens/index.dart';
@@ -17,6 +18,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+
+  final quickAction = const QuickActions();
+
+  @override
+  void initState() {
+    super.initState();
+    initQuickActions();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -25,12 +35,30 @@ class HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.secondColor,
-        elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppLayout.buttonFlagRadius)) ,
-        child: const Icon(Icons.add,color: AppColors.whiteColor,),
-        onPressed:()=> _goToNewTaskScreen(context),),
+      floatingActionButton: Row(
+        children: [
+
+          FloatingActionButton(
+            heroTag: "1",
+            onPressed: 
+          () {
+            context.read<TaskBloc>().add(DeleteAllTasks());
+            
+          },
+          
+          
+          ),
+
+
+          FloatingActionButton(
+            heroTag: "2",
+            backgroundColor: AppColors.secondColor,
+            elevation: 5,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppLayout.buttonFlagRadius)) ,
+            child: const Icon(Icons.add,color: AppColors.whiteColor,),
+            onPressed:()=> _goToNewTaskScreen(context),),
+        ],
+      ),
         body: SafeArea(
           child: Container(
             height: size.height,
@@ -58,7 +86,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                       (state.existTasks == false ||
                         state.tasks == null ||
-                       state.tasks!.isEmpty) ?
+                        state.tasks!.isEmpty) ?
                         const CustomNoTaskWidget():
                       
                       const CustomListCards(),
@@ -73,6 +101,21 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   void _goToNewTaskScreen(BuildContext context){
+    context.read<TaskBloc>().add(ActivatedTaskToEdit(taskToEdit: null));
     context.pushNamed(AppRoutesStrings.newTaskScreenRoute,extra: null);
   }
+  
+  // TODO:abstraer estos strings
+  void initQuickActions() {
+    quickAction.setShortcutItems([
+      const ShortcutItem(type: "newTask", localizedTitle: "Create Task")
+    
+    ]);
+    quickAction.initialize((type) {
+      if(type == "newTask"){
+        context.pushNamed(AppRoutesStrings.newTaskScreenRoute,extra:  null);
+      }
+    });
+  }
+
 }

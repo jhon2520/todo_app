@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_app/config/index.dart';
-import 'package:task_app/data/models/index.dart';
+import 'package:task_app/domain/models/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
 import 'package:task_app/utils/index.dart';
 import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
@@ -100,19 +100,19 @@ class _LevelSelector extends StatelessWidget {
           levelTaskEnum: LevelTaskEnum.low,
           color: AppColors.colorLowLevel,
         ),
-        CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
+        const CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
         _ItemSelector(
           taskToEdit: taskToEdit,
           levelTaskEnum: LevelTaskEnum.medium,
           color: AppColors.colorMediumLevel,
         ),
-        CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
+        const CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
         _ItemSelector(
           taskToEdit: taskToEdit,
           levelTaskEnum: LevelTaskEnum.high,
           color: AppColors.colorHighLevel,
         ),
-        CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
+        const CustomSpacer(spacerEnum: SpacerEnum.spacingM,isHorizontal: true,),
 
       ],
     );
@@ -131,7 +131,6 @@ class _ItemSelector extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final state = context.watch<TaskBloc>().state;
-    print("state task to edit ${state.taskToEdit?.level}");
 
     return GestureDetector(
       onTap: () =>_activateColorCurrentTask(context,state, color,levelTaskEnum),

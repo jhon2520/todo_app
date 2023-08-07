@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_app/config/index.dart';
-import 'package:task_app/data/models/index.dart';
+import 'package:task_app/domain/models/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
 import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/enums/index.dart';
@@ -141,7 +141,6 @@ class _CardButtonsWidget extends StatelessWidget {
   }
 
   void _editTaks(BuildContext context,TaskState state){
-    print("al darle click al boton editar ________${task?.id}");
 
     context.read<TaskBloc>().add(ActivatedTaskToEdit(
       taskToEdit: task

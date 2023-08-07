@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:task_app/infraestructure/driven_adapters/db_local/task_db_local/task_db_repository.dart';
 import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/localizations/app_localizations_delegate.dart';
 import 'config/index.dart';
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TaskBloc(),
+      create: (context) => TaskBloc(TaskDBRepostory())..add(GetPreviousSavedTask()),
       child: MaterialApp.router(
         routerConfig: appRouter,
         theme: AppTheme.appTheme(),

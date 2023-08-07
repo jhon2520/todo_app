@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_app/config/layout/app_layout.dart';
-import 'package:task_app/data/models/index.dart';
+import 'package:task_app/domain/models/index.dart';
 import 'package:task_app/presentation/screens/new_task_screen.dart/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
 import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
