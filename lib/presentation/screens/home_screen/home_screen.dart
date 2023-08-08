@@ -36,18 +36,20 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
-          FloatingActionButton(
-            heroTag: "1",
-            onPressed: 
-          () {
-            context.read<TaskBloc>().add(DeleteAllTasks());
+          
+          // TODO:delete
+          // FloatingActionButton(
+          //   heroTag: "1",
+          //   onPressed: 
+          // () {
+          //   context.read<TaskBloc>().add(DeleteAllTasks());
             
-          },
+          // },
           
           
-          ),
+          // ),
 
 
           FloatingActionButton(
@@ -59,6 +61,7 @@ class HomeScreenState extends State<HomeScreen> {
             onPressed:()=> _goToNewTaskScreen(context),),
         ],
       ),
+ 
         body: SafeArea(
           child: Container(
             height: size.height,
@@ -75,14 +78,6 @@ class HomeScreenState extends State<HomeScreen> {
                     children: [
                       const CustomSpacer(
                         spacerEnum: SpacerEnum.spacingS,
-                      ),
-                      CustomFadeInAnimation(
-                        child: Text(
-                          Languages.of(context).labelWelcome,
-                          style: AppFonts.fontStyle.copyWith(
-                              color: AppColors.mainColor,
-                              fontSize: AppFonts.fontSizeH1),
-                        ),
                       ),
                       (state.existTasks == false ||
                         state.tasks == null ||

@@ -54,16 +54,31 @@ class _CardBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final TextStyle  fontBold = AppFonts.fontStyle.copyWith(fontWeight: FontWeight.bold, fontSize: FontSizeEnum.h3.size);
+    final TextStyle  font = AppFonts.fontStyle.copyWith(fontSize: FontSizeEnum.h3.size);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("${Languages.of(context).labelTask} ${task?.taksName ?? ""}", style: AppFonts.fontStyle,maxLines: 1,overflow: TextOverflow.clip,),
-        Text("${Languages.of(context).labelDeadline} ${FormatsUtils.formatDates(task?.deadLine) }", style: AppFonts.fontStyle,),
         Row(
           children: [
-            Text(  "${Languages.of(context).labelLevel} ${_validateLevel(context,task!)}", style: AppFonts.fontStyle,),
+            Text(Languages.of(context).labelTask, style: fontBold ,maxLines: 1,overflow: TextOverflow.clip,),
+            Text(" ${task?.taksName ?? ""}", style: font,maxLines: 1,overflow: TextOverflow.clip,),
+          ],
+        ),
+        Row(
+          children: [
+            Text(Languages.of(context).labelDeadline, style: fontBold,),
+            Text(" ${FormatsUtils.formatDates(task?.deadLine)}", style: font,),
+          ],
+        ),
+        Row(
+          children: [
+            Text(  Languages.of(context).labelLevel, style:fontBold,),
+            Text(  " ${_validateLevel(context,task!)}", style: font),
             const CustomSpacer(spacerEnum: SpacerEnum.spacingS,isHorizontal: true,),
-            _CustomLevelBoxIndicator(color: task?.levelColor),
+            CustomLevelBoxIndicator(color: task?.levelColor),
           ],
         ),
         _CardButtonsWidget(task: task)
@@ -86,24 +101,6 @@ class _CardBodyWidget extends StatelessWidget {
   }
 }
 
-class _CustomLevelBoxIndicator extends StatelessWidget {
-
-  final Color? color;
-
-  const _CustomLevelBoxIndicator({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: math.pi /4,
-      child: Container(
-        height: AppLayout.boxLevelIndicatorHeightWitdth,
-        width: AppLayout.boxLevelIndicatorHeightWitdth,
-        color:color
-      ),
-    );
-  }
-}
 
 class _CardButtonsWidget extends StatelessWidget {
 
@@ -127,7 +124,7 @@ class _CardButtonsWidget extends StatelessWidget {
 
         CustomIconButton(
           onPressed: () => _deleteTask(context,state),
-          icon: const Icon(Icons.delete,color: AppColors.mainColor)),
+          icon: const Icon(Icons.delete,color: AppColors.errorColor)),
 
 
       ],

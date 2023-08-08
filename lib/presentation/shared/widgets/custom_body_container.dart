@@ -17,7 +17,7 @@ class CustomBodyContainer extends StatelessWidget {
 
     return Container(
       // padding: EdgeInsets.symmetric(horizontal: AppLayout.spacingM),
-      height: size.height * 0.88,
+      height: size.height * 0.85,
       width: double.infinity,
       decoration: _customDecoration(),
       child: SingleChildScrollView(child: child),

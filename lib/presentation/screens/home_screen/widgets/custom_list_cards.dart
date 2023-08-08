@@ -33,7 +33,7 @@ class CustomListCards extends StatelessWidget {
         child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(
-                horizontal: AppLayout.spacingM, vertical: AppLayout.spacingS),
+                horizontal: AppLayout.spacingX, vertical: AppLayout.spacingX),
             itemBuilder: (context, index) {
 
               final TaskModel task = state.tasks![index];

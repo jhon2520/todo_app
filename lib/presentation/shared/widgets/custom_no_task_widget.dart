@@ -18,7 +18,7 @@ class _CustomNoTaskWidgetState extends State<CustomNoTaskWidget>  with SingleTic
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this,duration: const Duration(milliseconds: 3000));
+    _controller = AnimationController(vsync: this,duration: const Duration(milliseconds: 1500));
     _animtationRotate = Tween(begin: 0.0,end: 1.5).animate(CurvedAnimation(parent: _controller, curve: Curves.bounceIn));
     _animationTraslate = Tween(begin: 0.0,end: 100.0).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
     super.initState();

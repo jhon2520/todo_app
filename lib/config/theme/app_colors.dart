@@ -8,9 +8,10 @@ class AppColors{
   static const Color errorColor = Color(0xff9C254D);
   static const Color succesColor = Color.fromARGB(255, 75, 168, 118);
   static const Color infoColor = Color(0xff256D85);
-  static const Color borderCardsColors = Color.fromARGB(255, 255, 255, 255);
+  static const Color borderCardsColors = Color.fromARGB(255, 206, 206, 206);
   static const Color cardsShade = Color.fromARGB(133, 158, 158, 158);
   static const Color colorHighLevel = Colors.red;
+  static const Color colorCircleCountTask = Color.fromARGB(255, 221, 73, 62);
   static const Color colorMediumLevel = Colors.yellow;
   static const Color colorLowLevel = Colors.green;
   static const Color borderFieldsColor = Color.fromARGB(94, 170, 172, 170);
