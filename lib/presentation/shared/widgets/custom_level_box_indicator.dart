@@ -56,11 +56,8 @@ class _Child extends StatelessWidget {
   final Color? color;
 
   const _Child({
-    super.key,
     this.color = AppColors.whiteColor
   });
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +70,7 @@ class _Child extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: color ?? AppColors.whiteColor,
-            offset: Offset(1, 1),
+            offset: const Offset(1, 1),
             spreadRadius: 1,
             blurRadius: 4
           )

@@ -9,8 +9,8 @@ import 'package:task_app/utils/enums/spacer_enum.dart';
 import 'package:task_app/utils/localizations/index.dart';
 import 'package:task_app/utils/shared_preferences/shared_preferences.dart';
 
-class CustomSelectionLanguage extends StatelessWidget {
-  const CustomSelectionLanguage({super.key});
+class CustomAppbarOptions extends StatelessWidget {
+  const CustomAppbarOptions({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,14 @@ class CustomSelectionLanguage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         const CustomSpacer(spacerEnum: SpacerEnum.spacingS, isHorizontal: true,),
-
+    
         CustomFadeInAnimation(child: Text("${Languages.of(context).appName}, ${Languages.of(context).labelWelcome}", style: AppFonts.fontStyle.copyWith(color: AppColors.whiteColor,fontSize: FontSizeEnum.h3.size),)),
         const Spacer(), 
-        const CustomCountTasks(),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: const CustomCountTasks()),
         const Spacer(), 
+        // TODO: si no voy a usar estas banderas eliminar también el paquete del ymal
         // CustomFlagButton(
         //   countryCode: FlagsCode.CO,
         //   onTap: () => _changeLanguage(context,AppString.spanishLanguage),
@@ -32,12 +35,12 @@ class CustomSelectionLanguage extends StatelessWidget {
         // CustomFlagButton(
         //   countryCode: FlagsCode.US,
         //   onTap: () => _changeLanguage(context,AppString.englishLanguage),
-        // ),
+        // ), 
         CustomIconButton(onPressed: () {
           _showMenuPopUp(context);
         }, icon: const Icon(Icons.more_vert_rounded,color: AppColors.whiteColor,)),
         const CustomSpacer(spacerEnum: SpacerEnum.spacingS, isHorizontal: true,),
-
+    
       ],
     );
   }
@@ -50,44 +53,29 @@ class CustomSelectionLanguage extends StatelessWidget {
   void _showMenuPopUp(BuildContext context)async{
 
     final size = MediaQuery.of(context).size;
+    final TextStyle  font = AppFonts.fontStyle.copyWith(fontSize: FontSizeEnum.h3.size);
 
     await showMenu(
       context: context, 
       position:  const RelativeRect.fromLTRB(200, 50, 0, 100),
-       items: [
+        items: [
         PopupMenuItem(
-          onTap: () {
-            
-          },
+          onTap: () => _changeLanguage(context,AppString.spanishLanguage),
           value: 1,
-          child: const Text("ROHIT",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-              color: Colors.green),),
+          child: Text(Languages.of(context).labelLanguageSpanish,
+            style: font,),
         ),
-        const PopupMenuItem(
+        PopupMenuItem(
+          onTap: () => _changeLanguage(context,AppString.englishLanguage),
           value: 2,
-          child: Text("REKHA", style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-              color: Colors.green),),
-        ),
-        const PopupMenuItem(
-          value: 3,
-          child: Text("DHRUV", style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-              color: Colors.green),),
+          child: Text(Languages.of(context).labelLanguageEnglish, 
+          style: font,),
         ),
       ],
     
     ).then((value) {
-      if(value != null )
-      print("value: $value");
+      if(value != null ){return;}
+
     });
   }
 }

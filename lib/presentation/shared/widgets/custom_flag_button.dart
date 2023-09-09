@@ -17,6 +17,7 @@ class CustomFlagButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ,
       child: CircleAvatar(
+        radius: AppLayout.buttonFlagRadius /2,
         backgroundColor: AppColors.whiteColor,
         child: Flag.fromCode(
           countryCode,

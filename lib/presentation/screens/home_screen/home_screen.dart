@@ -38,25 +38,11 @@ class HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          
-          // TODO:delete
-          // FloatingActionButton(
-          //   heroTag: "1",
-          //   onPressed: 
-          // () {
-          //   context.read<TaskBloc>().add(DeleteAllTasks());
-            
-          // },
-          
-          
-          // ),
-
-
+    
           FloatingActionButton(
             heroTag: "2",
             backgroundColor: AppColors.secondColor,
-            elevation: 5,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppLayout.buttonFlagRadius)) ,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppLayout.mainBodyRaidus)) ,
             child: const Icon(Icons.add,color: AppColors.whiteColor,),
             onPressed:()=> _goToNewTaskScreen(context),),
         ],
@@ -71,7 +57,7 @@ class HomeScreenState extends State<HomeScreen> {
                 const CustomSpacer(
                   spacerEnum: SpacerEnum.spacingM,
                 ),
-                const CustomSelectionLanguage(),
+                Expanded(child: const CustomAppbarOptions()),
                 const Spacer(),
                 CustomBodyContainer(
                   child: Column(

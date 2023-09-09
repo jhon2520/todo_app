@@ -50,6 +50,24 @@ class LanguageEs extends Languages{
   String get labelLevelMedium => "Medio";
   
   @override
-  String get labelTaskSaved => "Tarea Guardad";
+  String get labelTaskSaved => "Tarea Guardada";
+  
+  @override
+  String get labelLanguageEnglish => "Inglés";
+  
+  @override
+  String get labelLanguageSpanish => "Español";
+
+  @override
+  String get labelButtonCancel => "Cancelar";
+  
+  @override
+  String get labelButtonOk => "Aceptar";
+  
+  @override
+  String get labelConfirmDeleteTask => "¿Desea eliminar esta tarea?";
+  
+  @override
+  String get labeltitleDeleteTask => "Eliminar tarea";
 
 }

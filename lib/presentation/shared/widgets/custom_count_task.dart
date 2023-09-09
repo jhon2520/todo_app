@@ -15,18 +15,31 @@ class CustomCountTasks extends StatelessWidget {
 
     if(state.tasks == null || state.tasks!.isEmpty){
       return const SizedBox.shrink();
+    }else{
+      return Stack(
+        clipBehavior: Clip.none,
+        children: [
+          const Icon(Icons.warning,color: AppColors.whiteColor,),
+          Positioned(
+            left: -2,
+            top: -8,
+            child: Container(
+              alignment: Alignment.center,
+              height: AppLayout.customCountTasksRadius,
+              width: AppLayout.customCountTasksRadius,
+              decoration: _customDecoration(),
+              child: Text( state.tasks!.length > 9 ? "9+" : state.tasks!.length.toString(), 
+              style: AppFonts.fontStyle.copyWith(
+                fontSize: FontSizeEnum.h5.size,
+                color: AppColors.whiteColor),),
+            ),
+          ),
+    
+        ],
+      );
     }
 
-    return Container(
-      alignment: Alignment.center,
-      height: AppLayout.customCountTasksRadius,
-      width: AppLayout.customCountTasksRadius,
-      decoration: _customDecoration(),
-      child: Text( state.tasks!.length > 9 ? "9+" : state.tasks!.length.toString(), 
-      style: AppFonts.fontStyle.copyWith(
-        fontSize: FontSizeEnum.h4.size,
-        color: AppColors.whiteColor),),
-    );
+    
   }
 
   BoxDecoration _customDecoration() => BoxDecoration(

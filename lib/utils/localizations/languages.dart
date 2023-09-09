@@ -38,5 +38,18 @@ abstract class Languages{
 
   String get labelTaskSaved;
 
+  String get labelLanguageSpanish;
+
+  String get labelLanguageEnglish;
+
+  String get labeltitleDeleteTask;
+
+  String get labelConfirmDeleteTask;
+
+  String get labelButtonOk;
+
+  String get labelButtonCancel;
+
+
 
 }

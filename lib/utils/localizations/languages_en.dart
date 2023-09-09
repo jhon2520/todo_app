@@ -51,6 +51,25 @@ class LanguageEn extends Languages{
   
   @override
   String get labelTaskSaved => "Task Saved";
+  
+  @override
+  String get labelLanguageEnglish => "English";
+  
+  @override
+  String get labelLanguageSpanish => "Spanish";
+  
+  @override
+  String get labelButtonCancel => "Cancel";
+  
+  @override
+  String get labelButtonOk => "Ok";
+  
+  @override
+  String get labelConfirmDeleteTask => "Do you want to delete this task?";
+  
+  @override
+  String get labeltitleDeleteTask => "Delete task";
+  
 
 
 
