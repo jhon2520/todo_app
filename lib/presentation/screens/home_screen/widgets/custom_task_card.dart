@@ -68,7 +68,7 @@ class _CardBodyWidget extends StatelessWidget {
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
         ),
-        const _customDivider(),
+        const _CustomDivider(),
         Text(
           Languages.of(context).labelDeadline,
           style: fontBold,
@@ -77,7 +77,7 @@ class _CardBodyWidget extends StatelessWidget {
           " ${FormatsUtils.formatDates(task?.deadLine)}",
           style: font,
         ),
-        const _customDivider(),
+        const _CustomDivider(),
         Row(
           children: [
             Text(
@@ -143,7 +143,6 @@ class _CardButtonsWidget extends StatelessWidget {
 
   void _deleteTask(BuildContext context, TaskState state) {
     _showModalDeleteTask(context);
-    // context.read<TaskBloc>().add(DeletedTaskEvent(idToDelete: task?.id));
   }
 
   void _editTaks(BuildContext context, TaskState state) {
@@ -173,7 +172,8 @@ class _CardButtonsWidget extends StatelessWidget {
           CustomPrimaryButton(
             label: Languages.of(context).labelButtonOk,
             onPressed: () {
-              
+              context.pop();
+              context.read<TaskBloc>().add(DeletedTaskEvent(idToDelete: task?.id));
             },
           )
         ],
@@ -184,8 +184,8 @@ class _CardButtonsWidget extends StatelessWidget {
 
 }
 
-class _customDivider extends StatelessWidget {
-  const _customDivider({super.key});
+class _CustomDivider extends StatelessWidget {
+  const _CustomDivider();
 
   @override
   Widget build(BuildContext context) {

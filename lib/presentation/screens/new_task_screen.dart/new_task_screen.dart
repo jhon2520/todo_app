@@ -83,10 +83,9 @@ class NewTaskScreen extends StatelessWidget {
   }
 
    _editAndClose(BuildContext context, TaskState state){
-    // _editTask(context,state);
     _deactivateCurrtenTask(context,state);
     _closeScreen(context);
-    ShowSnackBar.showSnackBar(context, SnackBarEnum.success, Languages.of(context).labelTaskSaved);
+    ShowSnackBar.showSnackBar(context, SnackBarEnum.success, Languages.of(context).labelTaskEdited);
   }
 
   void _saveTaks(BuildContext context, TaskState state) {
@@ -94,9 +93,6 @@ class NewTaskScreen extends StatelessWidget {
       task: state.activeTask?.copyWith(id:DateTime.now().microsecondsSinceEpoch.toString())));
   }
 
-  void _editTask(BuildContext context, TaskState state){
-    context.read<TaskBloc>().add(EditedTaskEvent(taskToEditId: state.taskToEdit));
-  }
 
   void _deactivateCurrtenTask(BuildContext context, TaskState state) {
     context.read<TaskBloc>().add(DeactivatedCurrrentTask());

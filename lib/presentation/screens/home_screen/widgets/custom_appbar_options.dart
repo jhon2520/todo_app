@@ -1,4 +1,3 @@
-import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:task_app/config/index.dart';
 import 'package:task_app/presentation/animations/index.dart';
@@ -22,20 +21,10 @@ class CustomAppbarOptions extends StatelessWidget {
     
         CustomFadeInAnimation(child: Text("${Languages.of(context).appName}, ${Languages.of(context).labelWelcome}", style: AppFonts.fontStyle.copyWith(color: AppColors.whiteColor,fontSize: FontSizeEnum.h3.size),)),
         const Spacer(), 
-        Align(
+        const Align(
           alignment: Alignment.bottomCenter,
-          child: const CustomCountTasks()),
+          child: CustomCountTasks()),
         const Spacer(), 
-        // TODO: si no voy a usar estas banderas eliminar también el paquete del ymal
-        // CustomFlagButton(
-        //   countryCode: FlagsCode.CO,
-        //   onTap: () => _changeLanguage(context,AppString.spanishLanguage),
-        // ),
-        // const CustomSpacer(spacerEnum: SpacerEnum.spacingS, isHorizontal: true,),
-        // CustomFlagButton(
-        //   countryCode: FlagsCode.US,
-        //   onTap: () => _changeLanguage(context,AppString.englishLanguage),
-        // ), 
         CustomIconButton(onPressed: () {
           _showMenuPopUp(context);
         }, icon: const Icon(Icons.more_vert_rounded,color: AppColors.whiteColor,)),
@@ -52,7 +41,6 @@ class CustomAppbarOptions extends StatelessWidget {
 
   void _showMenuPopUp(BuildContext context)async{
 
-    final size = MediaQuery.of(context).size;
     final TextStyle  font = AppFonts.fontStyle.copyWith(fontSize: FontSizeEnum.h3.size);
 
     await showMenu(

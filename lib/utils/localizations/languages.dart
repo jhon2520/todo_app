@@ -38,6 +38,8 @@ abstract class Languages{
 
   String get labelTaskSaved;
 
+  String get labelTaskEdited;
+
   String get labelLanguageSpanish;
 
   String get labelLanguageEnglish;

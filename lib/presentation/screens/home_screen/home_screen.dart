@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:task_app/config/index.dart';
-import 'package:task_app/presentation/animations/index.dart';
 import 'package:task_app/presentation/screens/index.dart';
 import 'package:task_app/presentation/shared/widgets/index.dart';
 import 'package:task_app/presentation/state/tasks_bloc/task_bloc.dart';
 import 'package:task_app/utils/enums/index.dart';
-import 'package:task_app/utils/localizations/index.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,7 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
                 const CustomSpacer(
                   spacerEnum: SpacerEnum.spacingM,
                 ),
-                Expanded(child: const CustomAppbarOptions()),
+                const Expanded(child: CustomAppbarOptions()),
                 const Spacer(),
                 CustomBodyContainer(
                   child: Column(
@@ -86,12 +84,9 @@ class HomeScreenState extends State<HomeScreen> {
     context.pushNamed(AppRoutesStrings.newTaskScreenRoute,extra: null);
   }
   
-  // TODO:abstraer estos strings
   void initQuickActions() {
     quickAction.setShortcutItems([
-      const ShortcutItem(type: "newTask", localizedTitle: "Create Task")
-    
-    ]);
+      const ShortcutItem(type: "newTask", localizedTitle: "Create Task")]);
     quickAction.initialize((type) {
       if(type == "newTask"){
         context.pushNamed(AppRoutesStrings.newTaskScreenRoute,extra:  null);

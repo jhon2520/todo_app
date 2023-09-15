@@ -51,6 +51,9 @@ class LanguageEn extends Languages{
   
   @override
   String get labelTaskSaved => "Task Saved";
+
+  @override
+  String get labelTaskEdited => "Taks Edited";
   
   @override
   String get labelLanguageEnglish => "English";
@@ -69,6 +72,8 @@ class LanguageEn extends Languages{
   
   @override
   String get labeltitleDeleteTask => "Delete task";
+  
+
   
 
 
